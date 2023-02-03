@@ -5,10 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Data;
+import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "customers")
 public class Customer {
@@ -25,7 +29,10 @@ public class Customer {
   @Column(name = "number_phone")
   private Long numberPhone;
 
-  private String addrees;
+  private String address;
 
   private String email;
+
+  @OneToMany(mappedBy = "customer")
+  private List<Purchase> purchases;
 }

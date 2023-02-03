@@ -5,10 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Data;
+import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "categories")
 public class Category {
@@ -21,4 +25,7 @@ public class Category {
   private String description;
 
   private Boolean state;
+
+  @OneToMany(mappedBy = "category")
+  private List<Product> products;
 }
