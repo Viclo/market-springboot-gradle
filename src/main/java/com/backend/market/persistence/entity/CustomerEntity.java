@@ -14,18 +14,25 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "categories")
-public class Category {
+@Table(name = "customers")
+public class CustomerEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id_category")
-  private Long idCategory;
+  @Column(name = "id_customer")
+  private Long idCustomer;
 
-  private String description;
+  private String name;
 
-  private Boolean state;
+  private String lastname;
 
-  @OneToMany(mappedBy = "category")
-  private List<Product> products;
+  @Column(name = "number_phone")
+  private Long numberPhone;
+
+  private String address;
+
+  private String email;
+
+  @OneToMany(mappedBy = "customerEntity")
+  private List<PurchaseEntity> purchaseEntities;
 }

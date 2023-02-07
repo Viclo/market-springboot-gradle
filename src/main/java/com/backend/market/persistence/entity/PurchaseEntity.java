@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "purchases")
-public class Purchase {
+public class PurchaseEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,8 +39,8 @@ public class Purchase {
 
   @ManyToOne
   @JoinColumn(name = "id_customer", insertable = false, updatable = false)
-  private Customer customer;
+  private CustomerEntity customerEntity;
 
-  @OneToMany(mappedBy = "purchase")
-  private List<ProductPurchase> productPurchases;
+  @OneToMany(mappedBy = "purchaseEntity")
+  private List<ProductPurchaseEntity> productPurchaseEntities;
 }

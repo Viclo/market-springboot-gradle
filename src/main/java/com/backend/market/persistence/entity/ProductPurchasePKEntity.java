@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Embeddable
-public class ProductPurchasePK implements Serializable {
+public class ProductPurchasePKEntity implements Serializable {
 
   @Column(name = "id_product")
   private Long idProduct;

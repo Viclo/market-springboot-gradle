@@ -13,10 +13,10 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "product_purchases")
-public class ProductPurchase {
+public class ProductPurchaseEntity {
 
   @EmbeddedId
-  private ProductPurchasePK idProductPurchase;
+  private ProductPurchasePKEntity idProductPurchase;
 
   private Integer quantity;
 
@@ -26,9 +26,9 @@ public class ProductPurchase {
 
   @ManyToOne
   @JoinColumn(name = "id_purchase", insertable = false, updatable = false)
-  private Purchase purchase;
+  private PurchaseEntity purchaseEntity;
 
   @ManyToOne
   @JoinColumn(name = "id_product", insertable = false, updatable = false)
-  private Product product;
+  private ProductEntity productEntity;
 }
