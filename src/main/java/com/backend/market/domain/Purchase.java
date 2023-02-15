@@ -6,7 +6,7 @@ import java.util.List;
 public class Purchase {
 
   private Long idPurchase;
-  private Long idCustomer;
+  private String idCustomer;
   private LocalDateTime date;
   private String paymentMethod;
   private String comment;
@@ -21,11 +21,11 @@ public class Purchase {
     this.idPurchase = idPurchase;
   }
 
-  public Long getIdCustomer() {
+  public String getIdCustomer() {
     return idCustomer;
   }
 
-  public void setIdCustomer(Long idCustomer) {
+  public void setIdCustomer(String idCustomer) {
     this.idCustomer = idCustomer;
   }
 

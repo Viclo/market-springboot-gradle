@@ -23,7 +23,7 @@ public class PurchaseEntity {
   private Long idPurchase;
 
   @Column(name = "id_customer")
-  private Long idCustomer;
+  private String idCustomer;
 
   private LocalDateTime date;
 
@@ -49,11 +49,11 @@ public class PurchaseEntity {
     this.idPurchase = idPurchase;
   }
 
-  public Long getIdCustomer() {
+  public String getIdCustomer() {
     return idCustomer;
   }
 
-  public void setIdCustomer(Long idCustomer) {
+  public void setIdCustomer(String idCustomer) {
     this.idCustomer = idCustomer;
   }
 

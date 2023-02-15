@@ -6,13 +6,10 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {PurchaseMapper.class})
 public interface PurchaseItemMapper {
 
   @Mapping(source = "idProductPurchase.idProduct", target = "idProduct")
-  @Mapping(source = "quantity", target = "quantity")
-  @Mapping(source = "total", target = "total")
-  @Mapping(source = "state", target = "state")
   PurchaseItem toPurchaseItem(ProductPurchaseEntity productPurchaseEntity);
 
   @InheritInverseConfiguration
