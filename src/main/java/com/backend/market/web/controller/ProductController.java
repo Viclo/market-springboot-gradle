@@ -2,6 +2,9 @@ package com.backend.market.web.controller;
 
 import com.backend.market.domain.Product;
 import com.backend.market.domain.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,11 +25,18 @@ public class ProductController {
   private ProductService productService;
 
   @GetMapping()
+  @Operation(summary = "Get all products of the market.")
+  @ApiResponse(responseCode = "200", description = "Products found.")
   public ResponseEntity<List<Product>> getAll() {
     return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
   }
 
   @GetMapping("/{id}")
+  @Operation(summary = "Get a product by ID.")
+  @ApiResponses({
+      @ApiResponse(responseCode = "200", description = "Product found."),
+      @ApiResponse(responseCode = "404", description = "Product not found.")
+  })
   public ResponseEntity<Product> getProduct(@PathVariable("id") Long idProduct) {
     return productService.getProduct(idProduct)
         .map(product -> new ResponseEntity<>(product, HttpStatus.OK))

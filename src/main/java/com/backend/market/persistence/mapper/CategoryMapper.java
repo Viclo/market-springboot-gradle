@@ -5,7 +5,6 @@ import com.backend.market.persistence.entity.CategoryEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {
