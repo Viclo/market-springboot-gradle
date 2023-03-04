@@ -27,8 +27,7 @@ public class AuthenticationController {
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword())
     );
-    final UserDetails userDetails = userDao.findUserByEmail(
-        authenticationRequest.getEmail());
+    final UserDetails userDetails = userDao.findUserByEmail(authenticationRequest.getEmail());
     if (userDetails != null) {
       return ResponseEntity.ok(jwtUtils.generateToke(userDetails));
     }

@@ -4,14 +4,14 @@ import com.backend.market.domain.Product;
 import com.backend.market.domain.repository.ProductRepositoryDomain;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
 
-  @Autowired
-  private ProductRepositoryDomain productRepositoryDomain;
+  private final ProductRepositoryDomain productRepositoryDomain;
 
   public List<Product> getAll() {
     return productRepositoryDomain.getAll();

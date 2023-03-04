@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtUtils {
 
-  private String jwtSigningKey = "secret123secret123secret123secret123secret1";
+  private static final String JWT_SIGNING_KEY = "secret123secret123secret123secret123secret1";
 
   public String extractUsername(String token) {
     return extractClaim(token, Claims::getSubject);
@@ -35,7 +35,7 @@ public class JwtUtils {
   }
 
   private Claims extractAllClaims(String token) {
-    return Jwts.parser().setSigningKey(jwtSigningKey).parseClaimsJws(token).getBody();
+    return Jwts.parser().setSigningKey(JWT_SIGNING_KEY).parseClaimsJws(token).getBody();
   }
 
   private Boolean isTokenExpired(String token) {
@@ -57,7 +57,7 @@ public class JwtUtils {
         .claim("authorities", userDetails.getAuthorities())
         .setIssuedAt(new Date(System.currentTimeMillis()))
         .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(24)))
-        .signWith(SignatureAlgorithm.HS256, jwtSigningKey).compact();
+        .signWith(SignatureAlgorithm.HS256, JWT_SIGNING_KEY).compact();
   }
 
   public Boolean isTokenValid(String token, UserDetails userDetails) {

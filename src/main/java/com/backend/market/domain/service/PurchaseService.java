@@ -5,14 +5,14 @@ import com.backend.market.domain.repository.PurchaseRepositoryDomain;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class PurchaseService {
 
-  @Autowired
-  private PurchaseRepositoryDomain purchaseRepositoryDomain;
+  private final PurchaseRepositoryDomain purchaseRepositoryDomain;
 
   public List<Purchase> getAll() {
     return purchaseRepositoryDomain.getAll();

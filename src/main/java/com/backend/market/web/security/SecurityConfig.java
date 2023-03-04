@@ -1,6 +1,8 @@
 package com.backend.market.web.security;
 
 import com.backend.market.persistence.dao.UserDao;
+import java.util.Arrays;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,13 +28,17 @@ public class SecurityConfig {
 
   private final JwtAthFilter jwtAuthFilter;
   private final UserDao userDao;
+  private static final String[] AUTH_WHITELIST = {
+      "/v3/api-docs/**",
+      "/swagger-ui/**"
+  };
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
         .csrf().disable()
         .authorizeHttpRequests()
-          .requestMatchers("/auth/**")
+          .requestMatchers(AUTH_WHITELIST)
           .permitAll()
           .anyRequest()
         .authenticated()

@@ -33,7 +33,6 @@ public class ProductRepository implements ProductRepositoryDomain {
   @Override
   public Optional<List<Product>> getScareProducts(Integer lowQuantity) {
     Optional<List<ProductEntity>> productEntityList = productCrudRepository.findByStockQuantityLessThanAndState(lowQuantity, true);
-//    return productEntityList.map(products -> productMapper.toProducts(products));
     return productEntityList.map(productMapper::toProducts);
   }
 
