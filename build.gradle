@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.backend'
-version = '0.0.1-SNAPSHOT'
+version = '1.0'
 sourceCompatibility = '17'
 
 repositories {
@@ -18,7 +18,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
-	implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 
 	runtimeOnly 'org.postgresql:postgresql'

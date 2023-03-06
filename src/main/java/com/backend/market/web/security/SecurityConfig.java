@@ -30,7 +30,8 @@ public class SecurityConfig {
   private final UserDao userDao;
   private static final String[] AUTH_WHITELIST = {
       "/v3/api-docs/**",
-      "/swagger-ui/**"
+      "/swagger-ui/**",
+      "/auth/**"
   };
 
   @Bean
