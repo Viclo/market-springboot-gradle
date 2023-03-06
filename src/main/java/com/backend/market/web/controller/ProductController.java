@@ -3,8 +3,10 @@ package com.backend.market.web.controller;
 import com.backend.market.domain.Product;
 import com.backend.market.domain.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,17 +27,20 @@ public class ProductController {
   private final ProductService productService;
 
   @GetMapping()
-  @Operation(summary = "Get all products of the market.")
-  @ApiResponse(responseCode = "200", description = "Products found.")
+  @Operation(summary = "Get all products of the marketplace.", responses = {
+      @ApiResponse(responseCode = "200", description = "Products found.", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Product.class)))}),
+      @ApiResponse(responseCode = "403", description = "Access denied.", content = @Content(schema = @Schema(hidden = true))),
+      @ApiResponse(responseCode = "404", description = "Products not found.", content = @Content)
+  })
   public ResponseEntity<List<Product>> getAll() {
     return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
   }
 
   @GetMapping("/{id}")
-  @Operation(summary = "Get a product by ID.")
-  @ApiResponses({
-      @ApiResponse(responseCode = "200", description = "Product found."),
-      @ApiResponse(responseCode = "404", description = "Product not found.")
+  @Operation(summary = "Get a product by ID.", responses = {
+      @ApiResponse(responseCode = "200", description = "Successful Operation.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Product.class))),
+      @ApiResponse(responseCode = "403", description = "Access denied.", content = @Content(schema = @Schema(hidden = true))),
+      @ApiResponse(responseCode = "404", description = "Product not found.", content = @Content)
   })
   public ResponseEntity<Product> getProduct(@PathVariable("id") Long idProduct) {
     return productService.getProduct(idProduct)
@@ -44,12 +49,22 @@ public class ProductController {
   }
 
   @GetMapping("/category/{id}")
+  @Operation(summary = "Get products by category.", responses = {
+      @ApiResponse(responseCode = "200", description = "Successful Operation.", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Product.class)))}),
+      @ApiResponse(responseCode = "403", description = "Access denied.", content = @Content(schema = @Schema(hidden = true))),
+      @ApiResponse(responseCode = "404", description = "Category not found.", content = @Content)
+  })
   public ResponseEntity<List<Product>> getByCategory(@PathVariable("id") Long idCategory) {
     List<Product> products = productService.getByCategory(idCategory).orElse(null);
     return products != null && !products.isEmpty()? new ResponseEntity<>(products, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
 
   @GetMapping("/scareProducts/{quantity}")
+  @Operation(summary = "Get products by scare.", responses = {
+      @ApiResponse(responseCode = "200", description = "Successful Operation.", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Product.class)))}),
+      @ApiResponse(responseCode = "403", description = "Access denied.", content = @Content(schema = @Schema(hidden = true))),
+      @ApiResponse(responseCode = "404", description = "Products not found.", content = @Content)
+  })
   public ResponseEntity<List<Product>> getScareProducts(@PathVariable("quantity") Integer quantity) {
     return productService.getScareProducts(quantity)
         .map(products -> new ResponseEntity<>(products, HttpStatus.OK))
@@ -57,11 +72,20 @@ public class ProductController {
   }
 
   @PostMapping()
+  @Operation(summary = "Add a product.", responses = {
+      @ApiResponse(responseCode = "200", description = "Successful Operation.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Product.class))),
+      @ApiResponse(responseCode = "403", description = "Access denied.", content = @Content(schema = @Schema(hidden = true))),
+  })
   public ResponseEntity<Product> save(@RequestBody Product product) {
     return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.CREATED);
   }
 
   @DeleteMapping("/delete/{id}")
+  @Operation(summary = "Remove a product by ID.", responses = {
+      @ApiResponse(responseCode = "200", description = "Successful Operation.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Product.class))),
+      @ApiResponse(responseCode = "403", description = "Access denied.", content = @Content(schema = @Schema(hidden = true))),
+      @ApiResponse(responseCode = "404", description = "Product not found.", content = @Content)
+  })
   public ResponseEntity delete(@PathVariable("id") Long idProduct) {
     return productService.deleteProduct(idProduct)? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }

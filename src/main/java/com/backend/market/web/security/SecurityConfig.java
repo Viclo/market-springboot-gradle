@@ -1,8 +1,6 @@
 package com.backend.market.web.security;
 
 import com.backend.market.persistence.dao.UserDao;
-import java.util.Arrays;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
