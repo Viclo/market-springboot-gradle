@@ -1,6 +1,6 @@
-package com.backend.market.domain;
+package com.backend.market.domain.dto;
 
-public class Category {
+public class CategoryDto {
 
   private Long idCategoryDomain;
   private String category;

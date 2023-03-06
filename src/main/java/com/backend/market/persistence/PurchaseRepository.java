@@ -1,6 +1,6 @@
 package com.backend.market.persistence;
 
-import com.backend.market.domain.Purchase;
+import com.backend.market.domain.dto.PurchaseDto;
 import com.backend.market.domain.repository.PurchaseRepositoryDomain;
 import com.backend.market.persistence.crud.PurchaseCrudRepository;
 import com.backend.market.persistence.entity.PurchaseEntity;
@@ -21,32 +21,32 @@ public class PurchaseRepository implements PurchaseRepositoryDomain {
   private PurchaseMapper purchaseMapper;
 
   @Override
-  public List<Purchase> getAll() {
+  public List<PurchaseDto> getAll() {
     List<PurchaseEntity> purchaseEntityList = (List<PurchaseEntity>) purchaseCrudRepository.findAll();
     return purchaseMapper.toPurchases(purchaseEntityList);
   }
 
   @Override
-  public Optional<Purchase> getPurchase(Long idPurchase) {
+  public Optional<PurchaseDto> getPurchase(Long idPurchase) {
     return purchaseCrudRepository.findById(idPurchase)
         .map(purchase -> purchaseMapper.toPurchase(purchase));
   }
 
   @Override
-  public Optional<List<Purchase>> getByCustomer(String idCustomer) {
+  public Optional<List<PurchaseDto>> getByCustomer(String idCustomer) {
     return purchaseCrudRepository.findByIdCustomer(idCustomer)
         .map(purchases -> purchaseMapper.toPurchases(purchases));
   }
 
   @Override
-  public Optional<List<Purchase>> getByDate(LocalDateTime date) {
+  public Optional<List<PurchaseDto>> getByDate(LocalDateTime date) {
     return purchaseCrudRepository.findAllByDate(date)
         .map(purchases -> purchaseMapper.toPurchases(purchases));
   }
 
   @Override
-  public Purchase save(Purchase purchase) {
-    PurchaseEntity purchaseEntity = purchaseMapper.toPurchaseEntity(purchase);
+  public PurchaseDto save(PurchaseDto purchaseDto) {
+    PurchaseEntity purchaseEntity = purchaseMapper.toPurchaseEntity(purchaseDto);
     purchaseEntity.getProductPurchaseEntities().forEach(productPurchaseEntity -> productPurchaseEntity.setPurchaseEntity(purchaseEntity));
     return purchaseMapper.toPurchase(purchaseCrudRepository.save(purchaseEntity));
   }

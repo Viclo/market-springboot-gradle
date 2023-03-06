@@ -1,8 +1,8 @@
-package com.backend.market.domain;
+package com.backend.market.domain.dto;
 
 import java.math.BigDecimal;
 
-public class Product {
+public class ProductDto {
 
   private Long idProductDomain;
   private Long idCategoryDomain;
@@ -10,7 +10,7 @@ public class Product {
   private BigDecimal price;
   private Integer stockQuantity;
   private Boolean active;
-  private Category category;
+  private CategoryDto categoryDto;
 
   public Long getIdProductDomain() {
     return idProductDomain;
@@ -60,11 +60,11 @@ public class Product {
     this.active = active;
   }
 
-  public Category getCategory() {
-    return category;
+  public CategoryDto getCategory() {
+    return categoryDto;
   }
 
-  public void setCategory(Category category) {
-    this.category = category;
+  public void setCategory(CategoryDto categoryDto) {
+    this.categoryDto = categoryDto;
   }
 }

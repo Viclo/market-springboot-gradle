@@ -1,8 +1,8 @@
-package com.backend.market.domain;
+package com.backend.market.domain.dto;
 
 import java.math.BigDecimal;
 
-public class PurchaseItem {
+public class PurchaseItemDto {
 
   private Long idProduct;
   private Integer quantity;

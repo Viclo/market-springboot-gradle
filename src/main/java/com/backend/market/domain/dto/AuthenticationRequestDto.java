@@ -3,7 +3,7 @@ package com.backend.market.domain.dto;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class AuthenticationRequest {
+public class AuthenticationRequestDto {
 
   private String email;
   private String password;

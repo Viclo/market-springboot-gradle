@@ -1,6 +1,6 @@
 package com.backend.market.persistence.mapper;
 
-import com.backend.market.domain.Purchase;
+import com.backend.market.domain.dto.PurchaseDto;
 import com.backend.market.persistence.entity.PurchaseEntity;
 import java.util.List;
 import org.mapstruct.InheritInverseConfiguration;
@@ -17,10 +17,10 @@ public interface PurchaseMapper {
   @Mapping(source = "commentary", target = "comment")
   @Mapping(source = "state", target = "state")
   @Mapping(source = "productPurchaseEntities", target = "items")
-  Purchase toPurchase(PurchaseEntity purchaseEntity);
-  List<Purchase> toPurchases(List<PurchaseEntity> purchaseEntityList);
+  PurchaseDto toPurchase(PurchaseEntity purchaseEntity);
+  List<PurchaseDto> toPurchases(List<PurchaseEntity> purchaseEntityList);
 
   @InheritInverseConfiguration
   @Mapping(target = "customerEntity", ignore = true)
-  PurchaseEntity toPurchaseEntity(Purchase purchase);
+  PurchaseEntity toPurchaseEntity(PurchaseDto purchaseDto);
 }

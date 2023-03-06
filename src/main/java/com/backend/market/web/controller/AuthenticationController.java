@@ -1,7 +1,6 @@
 package com.backend.market.web.controller;
 
-import com.backend.market.domain.Product;
-import com.backend.market.domain.dto.AuthenticationRequest;
+import com.backend.market.domain.dto.AuthenticationRequestDto;
 import com.backend.market.persistence.dao.UserDao;
 import com.backend.market.web.security.JwtUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,11 +32,11 @@ public class AuthenticationController {
       @ApiResponse(responseCode = "403", description = "Access denied.", content = @Content(schema = @Schema(hidden = true))),
       @ApiResponse(responseCode = "404", description = "User not found.", content = @Content)
   })
-  public ResponseEntity<String> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+  public ResponseEntity<String> authenticate(@RequestBody AuthenticationRequestDto authenticationRequestDto) {
     authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword())
+        new UsernamePasswordAuthenticationToken(authenticationRequestDto.getEmail(), authenticationRequestDto.getPassword())
     );
-    final UserDetails userDetails = userDao.findUserByEmail(authenticationRequest.getEmail());
+    final UserDetails userDetails = userDao.findUserByEmail(authenticationRequestDto.getEmail());
     if (userDetails != null) {
       return ResponseEntity.ok(jwtUtils.generateToke(userDetails));
     }

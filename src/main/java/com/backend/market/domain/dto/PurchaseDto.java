@@ -1,9 +1,9 @@
-package com.backend.market.domain;
+package com.backend.market.domain.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class Purchase {
+public class PurchaseDto {
 
   private Long idPurchase;
   private String idCustomer;
@@ -11,7 +11,7 @@ public class Purchase {
   private String paymentMethod;
   private String comment;
   private String state;
-  private List<PurchaseItem> items;
+  private List<PurchaseItemDto> items;
 
   public Long getIdPurchase() {
     return idPurchase;
@@ -61,11 +61,11 @@ public class Purchase {
     this.state = state;
   }
 
-  public List<PurchaseItem> getItems() {
+  public List<PurchaseItemDto> getItems() {
     return items;
   }
 
-  public void setItems(List<PurchaseItem> items) {
+  public void setItems(List<PurchaseItemDto> items) {
     this.items = items;
   }
 }
